@@ -5,9 +5,10 @@ ___
 > [Mongoose](http://mongoosejs.com/docs/guide.html)
 > [Express](https://expressjs.com/)
 > [Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+> [EJS](http://ejs.co/)
 
 > #### It's a nice little app that lets you upload and download all kinds of files.
 > #### It's deployed on Heroku: https://mongo-uploads.herokuapp.com/
 
-> <img src="https://github.com/BiggaHD/Bootstrap_Projects/blob/master/stack.png" height="500" width="900">
+> <img src="https://github.com/BiggaHD/biggie_file_uploads/stack.png" height="300" width="700">
 ___
