@@ -177,7 +177,7 @@ app.get('/video/:filename', (req, res) => {
   });
 });
 
-// @check if it's a valid VIDEO file
+// @check if it's a valid TEXT file
 app.get('/text/:filename', (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     // Check if file

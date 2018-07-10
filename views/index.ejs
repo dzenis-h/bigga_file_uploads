@@ -56,8 +56,8 @@
                     <% } else if(file.isText) { %>
                           <iframe 
                           class="img-thumbnail border-secondary mb-2"
-                          id="inlineFrameExample"
-                          title="Inline Frame Example"
+                          id="textFile"
+                          title="Text file preview"
                           width="686"
                           height="200"
                           src="text/<%= file.filename %>"></iframe>
@@ -82,27 +82,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-  window.onload = function() {
-		var fileInput = document.getElementById('file');
-		var fileDisplayArea = document.getElementById('fileDisplayArea');
-
-		fileInput.addEventListener('change', function(e) {
-			var file = fileInput.files[0];
-			var textType = /text.*/;
-			if (file.type.match(textType)) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					fileDisplayArea.innerText = reader.result;
-				}
-				reader.readAsText(file);	
-			} else {
-				fileDisplayArea.innerText = "File not supported!"
-			}
-		});
-}
-  </script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
