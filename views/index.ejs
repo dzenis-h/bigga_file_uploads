@@ -37,12 +37,37 @@
               <% if(file.isImage) { %>
                 <a href="image/<%= file.filename %>" download>
                 <img class="img-thumbnail border-secondary mb-2" src="image/<%= file.filename %>" alt=""></a>
-                <% } else { %>
 
-                  <p class="lead font-italic" ><%= file.filename %></p>
+                <% } else if(file.isAudio) { %>
+                  <audio style="width: 686px; height: 75px;" class="img-thumbnail border-0 mb-2" controls>
+                    <source src="audio/<%= file.filename %>" type="audio/mp3">
+                    <source src="audio/<%= file.filename %>" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                  </audio>
+
+                  <% } else if(file.isVideo) { %>
+
+                  <video width="686px" controls class="img-thumbnail border-secondary mb-2">
+                      <source src="video/<%= file.filename %>" type="video/mp4">
+                      <source src="video/<%= file.filename %>" type="video/avi">
+                      Your browser does not support HTML5 video.
+                    </video>
+
+                    <% } else if(file.isText) { %>
+                          <iframe 
+                          class="img-thumbnail border-secondary mb-2"
+                          id="inlineFrameExample"
+                          title="Inline Frame Example"
+                          width="686"
+                          height="200"
+                          src="text/<%= file.filename %>"></iframe>
+
+                <% } else { %>
                   
                   <% } %>
                   <div>
+                      <p class="lead font-italic" ><%= file.filename %></p>
+
                       <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
                         <button class="col-md-5 float-left btn btn-outline-danger mx-1">Delete</button>
                       </form>
@@ -57,6 +82,27 @@
       </div>
     </div>
   </div>
+
+  <script>
+  window.onload = function() {
+		var fileInput = document.getElementById('file');
+		var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+		fileInput.addEventListener('change', function(e) {
+			var file = fileInput.files[0];
+			var textType = /text.*/;
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					fileDisplayArea.innerText = reader.result;
+				}
+				reader.readAsText(file);	
+			} else {
+				fileDisplayArea.innerText = "File not supported!"
+			}
+		});
+}
+  </script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
