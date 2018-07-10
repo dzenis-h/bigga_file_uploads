@@ -7,5 +7,5 @@ ___
 > * [EJS](http://ejs.co/#docs)
 > #### It's a nice little app that lets you upload and download all kinds of files.
 > #### It's deployed on Heroku: https://mongo-uploads.herokuapp.com/
-> <img src="https://github.com/BiggaHD/bigga_file_uploads/edit/master/stack.png" height="500" width="900">
+> <img src="https://github.com/BiggaHD/bigga_file_uploads/blob/master/stack.png" height="500" width="900">
 ___
