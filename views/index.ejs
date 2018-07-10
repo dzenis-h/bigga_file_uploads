@@ -65,14 +65,14 @@
                 <% } else { %>
                   
                   <% } %>
-                  <div>
+                  <div class="footer">
                       <p class="lead font-italic" ><%= file.filename %></p>
 
                       <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
-                        <button class="col-md-5 float-left btn btn-outline-danger mx-1">Delete</button>
+                        <a class="col-sm-5 float-left btn btn-outline-danger mb-2">Delete</a>
                       </form>
 
-                        <a href="/files/<%= file.filename %>" class="col-md-5 float-right btn btn-outline-success mx-1" download>Download</a>
+                        <a href="/files/<%= file.filename %>" class="col-sm-5 float-right btn btn-outline-success mb-2" download>Download</a>
                       </div>
             </div>
             <% }) %>
