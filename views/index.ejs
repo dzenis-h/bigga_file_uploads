@@ -26,7 +26,7 @@
         <form action="/upload" method="POST" enctype="multipart/form-data">
           <div class="custom-file mb-3">
             <input type="file" name="file" id="file" class="custom-file-input">
-            <label for="file" class="custom-file-label">Choose a File</label>
+            <label for="file" class="custom-file-label"><span class="text-info font-italic">Choose your file</span></label>
           </div>
           <input type="submit" value="Submit" class="btn btn-info btn-block">
         </form>
@@ -35,21 +35,21 @@
           <% files.forEach(function(file) { %>
             <div class="card card-body mb-3">
               <% if(file.isImage) { %>
-                <a href="image/<%= file.filename %>" download>
-                <img class="img-thumbnail border-secondary mb-2" src="image/<%= file.filename %>" alt=""></a>
+                <a href="file/<%= file.filename %>" download>
+                <img class="img-thumbnail border-secondary mb-2" src="file/<%= file.filename %>" alt=""></a>
 
                 <% } else if(file.isAudio) { %>
                   <audio style="width: 686px; height: 75px;" class="img-thumbnail border-0 mb-2" controls>
-                    <source src="audio/<%= file.filename %>" type="audio/mp3">
-                    <source src="audio/<%= file.filename %>" type="audio/mpeg">
+                    <source src="file/<%= file.filename %>" type="audio/mp3">
+                    <source src="file/<%= file.filename %>" type="audio/mpeg">
                   Your browser does not support the audio element.
                   </audio>
 
                   <% } else if(file.isVideo) { %>
 
-                  <video width="686px" controls class="img-thumbnail border-secondary mb-2">
-                      <source src="video/<%= file.filename %>" type="video/mp4">
-                      <source src="video/<%= file.filename %>" type="video/avi">
+                  <video width="686px" class="img-thumbnail border-secondary mb-2" controls>
+                      <source src="file/<%= file.filename %>" type="video/mp4">
+                      <source src="file/<%= file.filename %>" type="video/avi">
                       Your browser does not support HTML5 video.
                     </video>
 
@@ -60,7 +60,7 @@
                           title="Text file preview"
                           width="686"
                           height="200"
-                          src="text/<%= file.filename %>"></iframe>
+                          src="file/<%= file.filename %>"></iframe>
 
                 <% } else { %>
                   
@@ -89,6 +89,19 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+    <script>
+      // Custom script to display the fileName when it has been chosen
+        $("input[type=file]").change(function () {
+          var fieldVal = $(this).val();
+        // Change the node's value by removing the fake path (Chrome)
+        fieldVal = fieldVal.replace("C:\\fakepath\\", "");
+      if (fieldVal != undefined || fieldVal != "") {
+        $(this).next(".custom-file-label").attr('data-content', fieldVal);
+        $(this).next(".custom-file-label").text(fieldVal);
+    }
+  });
+    </script>
 </body>
 
 </html>

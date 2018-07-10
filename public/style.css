@@ -8,27 +8,22 @@
     color: aliceblue;
     display: block;
   }
-  
-  /* .header h1, small {
-    position: relative;
-    color: aliceblue;
-    /* top: 18px; */
-    /* left: 10px; */
-  /* } */
 
-  #fileDisplayArea {
+  /* #fileDisplayArea {
     margin-top: 2em;
     width: 100%;
     overflow-x: auto;
-  }
+  } */
 
   body {
     background: black;
   }
 
-  /* @media (max-width: 768px) {
-        h1: 6px red;
-  } */
+  .custom-file-label {
+    overflow: hidden;
+    font-weight: bolder;
+    color: darkred;
+  }
 
   @media (max-width: 575.98px) { 
     .header h1 {
@@ -56,5 +51,5 @@
  .header small {
     font-size: 0,5rem;
     display: inline-block;
-}
+ }
 }

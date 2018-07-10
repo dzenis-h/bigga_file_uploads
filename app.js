@@ -54,37 +54,10 @@ app.get('/', (req, res) => {
       res.render('index', { files: false });
     } else {
       files.map(file => {
-        if (
-          file.contentType === 'image/jpeg' ||
-          file.contentType === 'image/png'
-        ) {
-          file.isImage = true;
-        } else {
-          file.isImage = false;
-        }
-        if (
-          file.contentType === 'audio/mpeg' ||
-          file.contentType === 'audio/mp3'
-        ) {
-          file.isAudio = true;
-        } else {
-          file.isAudio = false;
-        }
-        if (
-          file.contentType === 'video/avi' ||
-          file.contentType === 'video/mp4'
-        ) {
-          file.isVideo = true;
-        } else {
-          file.isVideo = false;
-        }
-        if (
-          file.contentType === 'text/plain'
-        ) {
-          file.isText = true;
-        } else {
-          file.isText = false;
-        }
+        file.contentType === 'image/jpeg' || file.contentType === 'image/png' ? file.isImage = true : file.isImage = false;
+        file.contentType === 'audio/mpeg' || file.contentType === 'audio/mp3' ? file.isAudio = true : file.isAudio = false;
+        file.contentType === 'video/mp4'  || file.contentType === 'video/avi' ? file.isVideo = true : file.isVideo = false;
+        file.contentType === 'text/plain' ? file.isText = true : file.isText = false;
       });
       res.render('index', { files });
     }
@@ -108,14 +81,39 @@ app.get('/files', (req, res) => {
         err: 'No files exist'
       });
     }
-
     // Files exist
     return res.json(files);
   });
 });
 
+// @ Check if the file is a valid IMAGE || AUDIO || VIDEO || TEXT file format
+app.get('/file/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+
+    // Check the file types
+    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' ||
+        file.contentType === 'audio/mpeg' || file.contentType === 'audio/mp3' || 
+        file.contentType === 'video/mp4'  || file.contentType === 'video/avi' ||
+        file.contentType === 'text/plain') {
+      // Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an a valid file format'
+      });
+    }
+  });
+});
+
 // @route GET /files/:filename
-// @desc  Display/ Download single file object ... other than images
+// @desc  Display/ Download single file object ... other than the usual ones
 app.get('/files/:filename', (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     // Check if file
@@ -126,100 +124,6 @@ app.get('/files/:filename', (req, res) => {
     } else {
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(res);
-    }
-  });
-});
-
-
-// @check if it's a valid AUDIO file
-app.get('/audio/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      });
-    }
-
-    // Check if audio
-    if (file.contentType === 'audio/mpeg' || file.contentType === 'audio/mp3') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not an image'
-      });
-    }
-  });
-});
-
-// @check if it's a valid VIDEO file
-app.get('/video/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'Not a valid audio format'
-      });
-    }
-
-    // Check if audio
-    if (file.contentType === 'video/mp4' || file.contentType === 'video/avi') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not a valid video format'
-      });
-    }
-  });
-});
-
-// @check if it's a valid TEXT file
-app.get('/text/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'Not a valid audio format'
-      });
-    }
-
-    // Check if audio
-    if (file.contentType === 'text/plain') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not a text document'
-      });
-    }
-  });
-});
-
-// @route GET /image/:filename
-// @desc Display Image
-app.get('/image/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      });
-    }
-
-    // Check if image
-    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not an image'
-      });
     }
   });
 });
