@@ -1,0 +1,54 @@
+.header img {
+    float: left;
+    width: 100px;
+    height: 100px;
+  }
+
+  .header small {
+    color: aliceblue;
+    display: block;
+  }
+  
+  /* .header h1, small {
+    position: relative;
+    color: aliceblue;
+    /* top: 18px; */
+    /* left: 10px; */
+  /* } */
+
+  body {
+    background: black;
+  }
+
+  /* @media (max-width: 768px) {
+        h1: 6px red;
+  } */
+
+  @media (max-width: 575.98px) { 
+    .header h1 {
+        font-size: 0,1rem;
+        display: flex;
+    }
+    .header img {
+        width: 100px;
+        height: 125px;
+    }
+   }
+
+   @media (max-width: 1009.98px) {
+       .header img {
+        width: 100px;
+        height: 180px;
+    }
+   }
+
+    @media (max-width: 405px) {
+    .header img {
+     width: 100px;
+     height: 165px;
+ }
+ .header small {
+    font-size: 0,5rem;
+    display: inline-block;
+}
+}

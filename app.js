@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
@@ -10,7 +8,6 @@ const methodOverride = require('method-override');
 
 const app = express();
 app.use("/public", express.static('public')); 
-
 
 // Middleware
 app.use(bodyParser.json());
@@ -37,20 +34,15 @@ const storage = new GridFsStorage({
   url: mongoURI,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
-          filename: filename,
+          filename: file.originalname,
           bucketName: 'uploads'
         };
         resolve(fileInfo);
       });
-    });
-  }
+    }
 });
+
 const upload = multer({ storage });
 
 // @route GET /
@@ -71,7 +63,7 @@ app.get('/', (req, res) => {
           file.isImage = false;
         }
       });
-      res.render('index', { files: files });
+      res.render('index', { files });
     }
   });
 });
