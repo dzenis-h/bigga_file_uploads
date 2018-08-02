@@ -69,7 +69,7 @@
                       <p class="lead font-italic" ><%= file.filename %></p>
 
                       <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
-                        <a class="col-sm-5 float-left btn btn-outline-danger mb-2">Delete</a>
+                        <button class="col-sm-5 float-left btn btn-outline-danger mb-2">Delete</button>
                       </form>
 
                         <a href="/files/<%= file.filename %>" class="col-sm-5 float-right btn btn-outline-success mb-2" download>Download</a>
