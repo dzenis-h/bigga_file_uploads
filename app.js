@@ -5,6 +5,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
+const mongoURI = require('./config/keys');
 
 const app = express();
 app.use("/public", express.static('public')); 
@@ -13,9 +14,6 @@ app.use("/public", express.static('public'));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
-
-// Mongo URI
-const mongoURI = 'mongodb://BiggaHD:Test123@ds131721.mlab.com:31721/file_upload';
 
 // Create mongo connection
 const conn = mongoose.createConnection(mongoURI);
