@@ -16,7 +16,10 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 // Create mongo connection
-const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
+const conn = mongoose.createConnection(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // Init gfs
 let gfs;
@@ -44,10 +47,10 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 // @route GET /
-// @desc Loads form
+// @desc Load form
 app.get("/", (req, res) => {
   gfs.files.find().toArray((err, files) => {
-    // Check if files
+    // Check for files
     if (!files || files.length === 0) {
       res.render("index", { files: false });
     } else {
@@ -65,7 +68,8 @@ app.get("/", (req, res) => {
           ? (file.isText = true)
           : (file.isText = false);
       });
-      res.render("index", { files });
+      let newList = files.reverse();
+      res.render("index", { newList });
     }
   });
 });
@@ -98,7 +102,7 @@ app.get("/file/:filename", (req, res) => {
     // Check if file
     if (!file || file.length === 0) {
       return res.status(404).json({
-        err: "No file exists"
+        err: "No files exist"
       });
     }
 
@@ -117,14 +121,14 @@ app.get("/file/:filename", (req, res) => {
       readstream.pipe(res);
     } else {
       res.status(404).json({
-        err: "Not an a valid file format"
+        err: "Not a valid file format"
       });
     }
   });
 });
 
 // @route GET /files/:filename
-// @desc  Display/ Download single file object ... other than the usual ones
+// @desc  Display/ Download single file object
 app.get("/files/:filename", (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     // Check if file
@@ -150,4 +154,4 @@ app.delete("/files/:id", (req, res) => {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));

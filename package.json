@@ -1,13 +1,13 @@
 {
   "name": "bigga_uploads",
-  "version": "1.0.1",
-  "description": "Simple app to upload files to MongoDB",
+  "version": "2.0.0",
+  "description": "Simple app to upload + download = share files via MongoDB",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "BiggaHD",
+  "author": "Dzenis H.",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
