@@ -1,6 +1,6 @@
 {
   "name": "bigga_uploads",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple app to upload + download = share files via MongoDB",
   "main": "app.js",
   "scripts": {
