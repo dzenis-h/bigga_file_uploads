@@ -1,5 +1,4 @@
 ##
-
 # ![Bigga File Upload](https://raw.githubusercontent.com/dzenis-h/bigga_file_uploads/master/public/favicon.ico) Bigga File Upload
 
 ## Overview 🌄
@@ -10,7 +9,7 @@ An easy-to-use app with a pretty UI that lets you upload all kinds of files to a
 ## Tech Stack 🧰
 
 | Tech | Docs | Description |
-| --- | --- | --- |
+| :---: | --- | --- |
 | ![NodeJS](https://img.shields.io/badge/-NodeJS-339933?style=flat&logo=node.js&logoColor=white) | [NodeJS](https://nodejs.org/) | JavaScript runtime built on Chrome's V8 JavaScript engine |
 | ![Express](https://img.shields.io/badge/-Express-000000?style=flat&logo=express) | [Express](https://expressjs.com/) | Fast, unopinionated, minimalist web framework for Node.js |
 | ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat&logo=mongodb&logoColor=white) | [MongoDB](https://www.mongodb.com/) | Cross-platform document-oriented database program |
