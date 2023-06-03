@@ -1,1 +1,3 @@
-export const mongoURI = process.env.MONGO_URI;
+const mongoURI = process.env.mongoURI;
+
+module.exports = mongoURI;
